@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npx turbo run build --filter=storefront",
+  "outputDirectory": "apps/storefront/.next",
+  "framework": "nextjs"
+}
