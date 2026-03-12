@@ -5,7 +5,15 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function PaymentSuccessPage() {
-  const [orderData, setOrderData] = useState<any>(null);
+  type OrderData = {
+    id?: string;
+    customer_name?: string;
+    phone?: string;
+    total_amount: number;
+    advance_payment: number;
+    payment_status?: string;
+  };
+  const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 

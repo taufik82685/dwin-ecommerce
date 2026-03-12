@@ -92,9 +92,10 @@ export default function CheckoutPage() {
       } else {
         throw new Error('No payment URL received');
       }
-    } catch (err: any) {
-      console.error('Checkout error:', err);
-      setErrorMsg(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      const error = err as Error;
+      console.error('Checkout error:', error);
+      setErrorMsg(error.message || 'Something went wrong. Please try again.');
       setSubmitting(false);
     }
   };
