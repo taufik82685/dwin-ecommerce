@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  password  String
+  role      Role     @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Order     Order[]
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+model Product {
+  id             String      @id @default(uuid())
+  product_name   String
+  description    String
+  price          Float
+  discount_price Float?
+  category_id    String
+  category       Category    @relation(fields: [category_id], references: [id])
+  stock_quantity Int         @default(0)
+  product_images String[]
+  tags           String[]
+  featured       Boolean     @default(false)
+  visibility     Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  OrderItem      OrderItem[]
+}
+
+model Category {
+  id             String    @id @default(uuid())
+  category_name  String
+  category_image String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  Product        Product[]
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  customer_name   String
+  phone           String
+  address         String
+  email           String
+  subtotal        Float
+  delivery_charge Float
+  advance_payment Float
+  total_amount    Float
+  payment_status  PaymentStatus @default(PENDING)
+  order_status    OrderStatus   @default(PENDING)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  OrderItem       OrderItem[]
+  Payment         Payment[]
+}
+
+enum PaymentStatus {
+  PENDING
+  ADVANCE_PAID
+  PAID
+  FAILED
+}
+
+enum OrderStatus {
+  PENDING
+  ADVANCE_PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id           String  @id @default(uuid())
+  order_id     String
+  order        Order   @relation(fields: [order_id], references: [id])
+  product_id   String
+  product      Product @relation(fields: [product_id], references: [id])
+  product_name String
+  quantity     Int
+  price        Float
+}
+
+model Payment {
+  id              String   @id @default(uuid())
+  order_id        String
+  order           Order    @relation(fields: [order_id], references: [id])
+  payment_gateway String
+  transaction_id  String?
+  payment_amount  Float
+  payment_status  PaymentStatus @default(PENDING)
+  createdAt       DateTime @default(now())
+}
+
+model Settings {
+  id                       String @id @default("global")
+  website_logo             String @default("")
+  homepage_banner          String @default("")
+  theme_color              String @default("#0B0B0B")
+  delivery_charge          Float  @default(120)
+  advance_payment_amount   Float  @default(100)
+  payment_instructions     String @default("Send advance payment to bKash or NagorikPay")
+  checkout_instructions    String @default("Please provide accurate delivery details.")
+  checkout_fields          Json   @default("[]") // For dynamic checkout fields
+}
+
+model Coupon {
+  id            String   @id @default(uuid())
+  coupon_code   String   @unique
+  discount_type DiscountType
+  discount_value Float
+  expiry_date   DateTime
+  usage_limit   Int      @default(0)
+  times_used    Int      @default(0)
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+model Banner {
+  id          String   @id @default(uuid())
+  title       String
+  subtitle    String?
+  image_url   String
+  link        String?
+  isActive    Boolean  @default(true)
+  type        String   @default("HERO") // HERO, PROMO, OFFER
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
