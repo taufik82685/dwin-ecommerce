@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: dwin-api
+    env: node
+    buildCommand: npm install && npx turbo run build --filter=api
+    startCommand: cd apps/api && npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: NAGORIKPAY_API_KEY
+        value: HMZ3Okp4vE22c1HmzHxaClN9dQ3t0rELj6m3p9Fm1AFviXpFwG
+      - key: FRONTEND_URL
+        sync: false
+      - key: API_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
