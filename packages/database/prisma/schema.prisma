@@ -33,6 +33,8 @@ model Product {
   category_id    String
   category       Category    @relation(fields: [category_id], references: [id])
   stock_quantity Int         @default(0)
+  sizes          String[]
+  colors         String[]
   product_images String[]
   tags           String[]
   featured       Boolean     @default(false)
