@@ -138,47 +138,44 @@ export default function ProductsManagement() {
   const previewImages = formData.images.split('\n').map(s => s.trim()).filter(Boolean);
 
   return (
-    <div className="p-8">
+    <div className="p-6 min-h-screen">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-black text-white tracking-wide">INVENTORY <span className="text-cyan-400">CONTROL</span></h1>
-          <p className="text-gray-400 text-sm mt-1">{products.length} products total</p>
+          <p className="text-xs text-[#06b6d4] font-mono tracking-[0.3em] uppercase mb-1">Inventory Control</p>
+          <h1 className="text-3xl font-black text-white font-orbitron tracking-widest">PRODUCTS</h1>
+          <p className="text-slate-500 text-xs font-mono mt-1">{products.length} units indexed</p>
         </div>
-        <button onClick={openAdd} className="px-6 py-2.5 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition-colors shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+        <button onClick={openAdd} className="px-6 py-2.5 bg-[#06b6d4] text-[#0f172a] text-xs font-black rounded-sm hover:bg-white transition-colors shadow-[0_0_20px_rgba(6,182,212,0.3)] uppercase tracking-widest font-orbitron">
           + ADD PRODUCT
         </button>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-6 mb-8">
-        <div className="bg-[#121212] border border-white/5 p-4 rounded-xl">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-1">Total Products</p>
-          <p className="text-2xl font-black text-white">{products.length}</p>
-        </div>
-        <div className="bg-[#121212] border border-white/5 p-4 rounded-xl">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-1">Out of Stock</p>
-          <p className="text-2xl font-black text-red-500">{products.filter(p => p.stock === 0).length}</p>
-        </div>
-        <div className="bg-[#121212] border border-white/5 p-4 rounded-xl">
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-1">Active Listings</p>
-          <p className="text-2xl font-black text-purple-400">{products.filter(p => p.status === 'Active').length}</p>
-        </div>
+      <div className="grid grid-cols-3 gap-5 mb-8">
+        {[
+          { label: 'Total Products', value: products.length, color: '#06b6d4' },
+          { label: 'Out of Stock', value: products.filter(p => p.stock === 0).length, color: '#ef4444' },
+          { label: 'Active Listings', value: products.filter(p => p.status === 'Active').length, color: '#8b5cf6' },
+        ].map(s => (
+          <div key={s.label} className="stat-card rounded-xl p-5">
+            <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-mono mb-2">{s.label}</p>
+            <p className="text-3xl font-black font-orbitron" style={{ color: s.color }}>{s.value}</p>
+          </div>
+        ))}
       </div>
 
       {/* Table */}
-      <div className="bg-[#121212] border border-white/10 rounded-xl overflow-hidden">
-        <div className="flex gap-4 p-4 border-b border-white/5 bg-[#0a0a0a]">
-          <input type="text" placeholder="Search products..." className="bg-[#1a1a1a] border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 w-64" />
-          <select className="bg-[#1a1a1a] border border-white/10 rounded-lg px-3 py-2 text-sm text-gray-300 focus:outline-none">
+      <div className="glass-panel rounded-xl overflow-hidden">
+        <div className="flex gap-4 p-4 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(10,22,40,0.6)]">
+          <input type="text" placeholder="Search products..." className="input-cyber w-64" />
+          <select className="input-cyber w-auto">
             <option>All Categories</option>
-            <option>Gaming Mice</option>
-            <option>Keyboards</option>
-            <option>Audio</option>
+            <option>Gaming Mice</option><option>Keyboards</option><option>Audio</option>
           </select>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-gray-300">
+          <table className="w-full data-table text-left">
             <thead className="bg-[#0a0a0a] text-xs uppercase text-gray-500 font-bold tracking-wider">
               <tr>
                 <th className="px-6 py-4">Product</th>
