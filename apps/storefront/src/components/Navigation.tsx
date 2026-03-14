@@ -17,20 +17,34 @@ export const Navigation = () => {
               HOME
             </Link>
             <Link href="/products" className="text-gray-300 hover:text-cyan-400 font-medium tracking-wide transition-colors">
-              GEAR
+              SHOP GEAR
             </Link>
             <Link href="/track" className="text-gray-300 hover:text-purple-400 font-medium tracking-wide transition-colors">
               TRACK ORDER
             </Link>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Link href="/cart" className="relative p-2 text-cyan-400 hover:text-white transition-colors">
+          <div className="flex items-center gap-6">
+            <form action="/products" method="GET" className="hidden lg:flex items-center">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  name="q" 
+                  placeholder="Search products, categories..." 
+                  className="bg-white/5 border border-white/10 rounded-full py-1.5 pl-4 pr-10 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors w-64 backdrop-blur-md placeholder-gray-500"
+                />
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cyan-400 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+              </div>
+            </form>
+
+            <Link href="/cart" className="relative p-2 text-cyan-400 hover:text-white transition-colors group">
               <span className="absolute top-0 right-0 -mt-1 -mr-1 flex h-4 w-4">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-4 w-4 bg-cyan-500 text-[10px] items-center justify-center text-white font-bold">2</span>
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
