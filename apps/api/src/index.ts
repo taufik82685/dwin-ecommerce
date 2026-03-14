@@ -27,6 +27,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Gaming Ecommerce API is running.' });
 });
 
+app.get('/', (req, res) => {
+  res.send('Dwin eCommerce API is live and running globally 🚀');
+});
+
 // Start Server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
