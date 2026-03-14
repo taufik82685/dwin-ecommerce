@@ -12,7 +12,7 @@ services:
       - key: FRONTEND_URL
         value: https://dwin-ecom.vercel.app
       - key: API_URL
-        value: https://dwin-api.onrender.com
+        value: https://dwin-ecommerce.onrender.com
       - key: NODE_ENV
         value: production
       - key: PORT
