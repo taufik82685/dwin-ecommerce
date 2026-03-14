@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
+import dynamic from "next/dynamic";
+import ChatbotWidget from "@/components/ChatbotWidget";
+
+const ThreeBackground = dynamic(() => import("@/components/ThreeBackground"), { ssr: false });
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +19,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "EsportsGear | Premium Gaming Store",
+  title: "DWIN Store Enterprise V2",
   description: "Advanced Cyberpunk Gaming Ecommerce Platform",
 };
 
@@ -27,10 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0B0B0B] text-white min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen`}
       >
+        <ThreeBackground />
         <Navigation />
-        <main className="pt-20">
+        <ChatbotWidget />
+        <main className="pt-20 relative z-10">
           {children}
         </main>
       </body>

@@ -12,9 +12,12 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "var(--primary)",
+        accent: "var(--accent)",
         neon: {
-          cyan: "var(--neon-cyan)",
+          cyan: "var(--accent)",
           purple: "var(--neon-purple)",
+          green: "var(--highlight)",
         }
       },
       animation: {

@@ -1,25 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #0B0B0B;
-  --foreground: #ffffff;
+  --background: #0f172a; /* Deep Cyberpunk Blue/Dark */
+  --foreground: #f8fafc;
   
-  --neon-cyan: #00d2ff;
-  --neon-purple: #a855f7;
+  --primary: #0f172a;
+  --accent: #06b6d4; /* Cyan */
+  --neon-purple: #8b5cf6;
+  --highlight: #22c55e; /* Green */
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-orbitron {
+  font-family: 'Orbitron', sans-serif;
 }
 
 @layer utilities {
   .text-shadow-neon {
-    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
   }
   
   .text-shadow-purple {
@@ -27,7 +35,11 @@ body {
   }
   
   .glass-panel {
-    @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+    @apply bg-[#1e293b]/40 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)];
+  }
+
+  .glass-panel-hover {
+    @apply transition-all duration-300 hover:bg-[#1e293b]/60 hover:border-[#06b6d4]/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)];
   }
 }
 
@@ -36,12 +48,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505; 
+  background: var(--background); 
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f2937; 
+  background: #334155; 
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan); 
+  background: var(--accent); 
 }
