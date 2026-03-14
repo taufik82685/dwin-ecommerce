@@ -34,34 +34,48 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#0A0A0A]">
+        {/* Abstract animated background elements */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-glow-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-glow-pulse" style={{ animationDelay: '1s' }}></div>
+
+        <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070"
             alt="Gaming hero banner"
             fill
             priority
-            className="object-cover opacity-30 mix-blend-luminosity"
+            className="object-cover opacity-20 mix-blend-luminosity grayscale"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-[#0A0A0A]/80 to-[#0A0A0A]"></div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/60 to-transparent"></div>
         
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+        <div className="relative z-10 text-center max-w-5xl mx-auto px-4 mt-20">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="inline-block mb-4 px-4 py-1.5 rounded-full border border-white/10 glass-panel bg-white/5 backdrop-blur-md">
+            <span className="text-xs font-semibold tracking-widest text-cyan-400 uppercase">A complete lifestyle brand for gamers</span>
+          </motion.div>
+          
           <motion.h1
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-black mb-6 tracking-tighter"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-tight"
           >
-            GEAR UP FOR <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">VICTORY</span>
+            Find your next <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">favorite gear.</span>
           </motion.h1>
+          
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto font-light"
           >
-            Premium esports gaming equipment designed for elite players who demand the best performance.
+            Search by product name, category, or explore variants in one place. Curated for everyday confidence and elite performance.
           </motion.p>
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
-            <a href="/products">
-              <CyberButton variant="primary" className="text-lg px-10 py-4">SHOP NEW ARRIVALS</CyberButton>
+          
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="/products" className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+              Browse Products
+            </a>
+            <a href="/categories" className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 backdrop-blur-md transition-colors">
+              Explore Categories
             </a>
           </motion.div>
         </div>
