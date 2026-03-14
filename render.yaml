@@ -6,13 +6,13 @@ services:
     startCommand: npm run start -w apps/api
     envVars:
       - key: DATABASE_URL
-        sync: false
+        value: postgresql://neondb_owner:npg_2EgcXS9BwHCx@ep-blue-resonance-a1h2mwi2-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
       - key: NAGORIKPAY_API_KEY
         value: HMZ3Okp4vE22c1HmzHxaClN9dQ3t0rELj6m3p9Fm1AFviXpFwG
       - key: FRONTEND_URL
-        sync: false
+        value: https://dwin-ecom.vercel.app
       - key: API_URL
-        sync: false
+        value: https://dwin-api.onrender.com
       - key: NODE_ENV
         value: production
       - key: PORT
